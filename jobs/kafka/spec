@@ -38,6 +38,21 @@ properties:
     description: "The port to listen for client connections"
     default: 9092
 
+<<<<<<< HEAD
+=======
+  starting_index:
+    description: "The smaller index number of the kafka deployment"
+    default: 1
+
+  index_spacing:
+    description: "The spacing of the kafka ids (indexes) between instances"
+    default: 1
+
+  rack_id:
+    description: "Rack of the broker. This will be used in rack aware replication assignment for fault tolerance. Examples: `RACK1`, `us-east-1d`"
+    default: "RACK1"
+
+>>>>>>> introducing kafka rack awareness
   jmx_port:
     description: "The port to listen for JMX connections, disabled by default"
     default: ''

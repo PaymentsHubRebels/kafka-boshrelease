@@ -1,0 +1,100 @@
+---
+name: kafka2
+
+addons:
+- name: bpm
+  jobs:
+  - name: bpm
+    release: bpm
+
+instance_groups:
+- name: kafka
+  azs: [z1, z2, z3]
+  instances: 3
+  vm_resources:
+    cpu: 1
+    ram: 1048
+    ephemeral_disk_size: 10240
+  stemcell: default
+  persistent_disk: 10240
+  networks: [{name: default}]
+  jobs:
+  - name: kafka
+    release: kafka
+    consumes:
+      zookeeper:
+        deployment: zookeeper
+    properties:
+      starting_index: 2
+      index_spacing: 2
+      rack_id: RACK2
+      offsets:
+        topic:
+          replication:
+            factor: 1
+      transaction:
+        state:
+          log:
+            replication:
+              factor: 1
+            min:
+              isr: 1
+- name: kafka-manager
+  azs: [z1, z2, z3]
+  instances: 1
+  vm_resources:
+    cpu: 1
+    ram: 1024
+    ephemeral_disk_size: 10240
+  stemcell: default
+  persistent_disk: 10240
+  networks: [{name: default}]
+  jobs:
+  - name: kafka-manager
+    release: kafka
+    consumes:
+      zookeeper:
+        deployment: zookeeper
+    properties:
+      username: admin
+      password: ((kafka-manager-password))
+- name: sanity-test
+  azs: [z1, z2, z3]
+  instances: 1
+  lifecycle: errand
+  vm_resources:
+    cpu: 1
+    ram: 1024
+    ephemeral_disk_size: 10240
+  stemcell: default
+  networks: [{name: default}]
+  jobs:
+  - name: sanitytest
+    release: kafka
+    consumes:
+      zookeeper:
+        deployment: zookeeper
+
+variables:
+- name: kafka-manager-password
+  type: password
+
+stemcells:
+- alias: default
+  os: ubuntu-xenial
+  version: "250.58"
+
+update:
+  canaries: 1
+  canary_watch_time: 1000-60000
+  update_watch_time: 1000-60000
+  max_in_flight: 1
+  serial: true
+
+releases:
+- name: "bpm"
+  version: "1.1.0"
+  url: "https://bosh.io/d/github.com/cloudfoundry/bpm-release?v=1.1.0"
+  sha1: "82e83a5e8ebd6e07f6ca0765e94eb69e03324a19"
+- name: "kafka"
+  version: latest
