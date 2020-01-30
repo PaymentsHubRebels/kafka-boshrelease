@@ -14,13 +14,3 @@ export LOG_DIR=/var/vcap/sys/log/kafka
 <% zks = link('zookeeper') %>
 <% zk_port = zks.p('client_port') %>
 <% list =  zks.instances.map { |instance| "#{instance.address}:#{zk_port}" }.join(",") %>
-
-<% p("topics").each do |topic| %>
-/var/vcap/packages/kafka/bin/kafka-topics.sh \
-    --create \
-    --zookeeper <%= list %> \
-    --replication-factor <%= topic["replication_factor"] || 1 %> \
-    --partitions <%= topic["partitions"] || 1 %> \
-    --topic <%= topic["name"] %> \
-    --if-not-exists
-<% end %>
