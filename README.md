@@ -80,6 +80,14 @@ bosh ssh kafka-manager/0 -- -L 8080:127.0.0.1:8080
 
 Kafka Manager requires basic auth credentials. The default `username` is `admin`, and the `password` is the `((kafka-manager-password))` value from either Credhub/Config Server, or your `--vars-store creds.yml` file.
 
+### Rack awareness
+
+Following the documentation on [rack awareness](http://kafka.apache.org/documentation/#basic_ops_racks) by setting the `rack_id` property to `az` the rack_id for each instance becomes the zone it instanciates.
+
+### Broker ID spacing
+
+Broker ids are based on spec.id of each `kafka` instance. If custom numbering is required providing the `statring_index` and the `index_spacing` properties will change the default behaviour.
+
 ### Update
 
 When new versions of `kafka-boshrelease` are released the `manifests/kafka.yml` file will be updated. This means you can easily `git pull` and `bosh deploy` to upgrade.
