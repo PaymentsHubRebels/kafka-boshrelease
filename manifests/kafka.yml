@@ -80,6 +80,19 @@ instance_groups:
   jobs:
   - name: sanitytest
     release: kafka
+- name: generate-topics
+  azs: [z1, z2, z3]
+  instances: 1
+  lifecycle: errand
+  vm_resources:
+    cpu: 1
+    ram: 1024
+    ephemeral_disk_size: 10240
+  stemcell: default
+  networks: [{name: default}]
+  jobs:
+  - name: generatetopics
+    release: kafka
 
 variables:
 - name: kafka-manager-password
