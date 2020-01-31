@@ -19,7 +19,7 @@ If your BOSH does not have Credhub/Config Server, then remember `--vars-store` t
 
 ### Topics
 
-> Topics used to be created while deploying. That has shown some issues in subsequent deployments on heavy loaded deployments where syncronisation is suffering. Now in order to apply all topics provided in deployment usage of errand `generatetopics` is required.
+> Topics used to be created while deploying. That has shown some issues in subsequent deployments on heavy loaded deployments where syncronisation is suffering. Usage of errand `generatetopics` is required in order to apply all topics provided in deployment.
 
 You can pre-define some simple topics using an operator script `./manifests/operators/simple-topics.sh`. Th
 
