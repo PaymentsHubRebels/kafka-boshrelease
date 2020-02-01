@@ -62,7 +62,7 @@ describe 'kafka job' do
         expect(template.render(manifest, consumes: links)).to include("broker.id=3")
       end
 
-      it "sets broker id for second instance based on starting index provided" do
+      it "sets broker id for third instance based on starting index provided" do
         expect(template.render(manifest, spec: instance_2, consumes: links)).to include("broker.id=7")
       end
     end
