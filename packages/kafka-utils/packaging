@@ -1,0 +1,9 @@
+#!/bin/bash -eu
+
+source /var/vcap/packages/python-3.8/bosh/compile.env
+
+pip3 install --prefix=${BOSH_INSTALL_TARGET} ${BOSH_COMPILE_TARGET}/kafka-utils/kafka-utils-3.2.0.tar.gz
+
+echo "Copying runtime.env..."
+mkdir ${BOSH_INSTALL_TARGET}/bosh
+cp kafka-utils/runtime.env ${BOSH_INSTALL_TARGET}/bosh/runtime.env

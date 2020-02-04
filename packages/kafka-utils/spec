@@ -1,0 +1,7 @@
+---
+name: kafka-utils
+dependencies:
+- python-3.8
+files:
+- kafka-utils/kafka-utils*
+- kafka-utils/runtime.env

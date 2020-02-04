@@ -4,6 +4,8 @@ name: sanitytest
 packages:
 - openjdk-8-kafka
 - kafka
+- python-3.8
+- kafka-utils
 
 templates:
   bin/run: bin/run
