@@ -13,6 +13,7 @@ templates:
   config/ca_certs.pem: config/ca_certs.pem
   config/cert.pem: config/cert.pem
   config/key.pem: config/key.pem
+  config/kafka_discovery/cluster.yaml: config/kafka_discovery/cluster.yaml
 
 consumes:
 - name: zookeeper
@@ -26,3 +27,5 @@ consumes:
   - enable_sasl_scram
   - jaas_admin.username
   - jaas_admin.password
+
+properties: {}

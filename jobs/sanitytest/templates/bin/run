@@ -8,6 +8,8 @@ set -u # report the usage of uninitialized variables
 ############################################################################
 
 source /var/vcap/packages/openjdk-8-kafka/bosh/runtime.env
+source /var/vcap/packages/kafka-utils/bosh/runtime.env
+
 export PATH=$PATH:/var/vcap/packages/kafka/bin:$PATH
 
 CDIR=/var/vcap/jobs/sanitytest/config
@@ -30,12 +32,25 @@ export zk_peers=<%= zks.instances.map { |instance| "#{instance.address}:#{zk_por
 
 <% kafka_port = kafka.p('listen_port') %>
 export kafka_hosts=<%= kafka.instances.map { |instance| "#{instance.address}:#{kafka_port}" }.join(",") %>
+export kafka_hosts_count=<%= kafka.instances.length == 1 ? 1 : kafka.instances.length - 1 %>
 
 export testpath=/var/vcap/sys/run/sanitytest
 mkdir -p $testpath
 
 set -x
-kafka-topics.sh --zookeeper $zk_peers --create --if-not-exists --replication-factor 1 --partitions 1 --topic test > $testpath/demo.out
+kafka-topics.sh --zookeeper $zk_peers --create --if-not-exists --replication-factor $kafka_hosts_count --partitions $kafka_hosts_count --topic test > $testpath/demo.out
 echo "test message" | kafka-console-producer.sh --broker-list $kafka_hosts --topic test --producer.config $CDIR/client.properties 2> /dev/null 
 kafka-console-consumer.sh --bootstrap-server $kafka_hosts --topic test --from-beginning --max-messages 1 --consumer.config $CDIR/client.properties >> $testpath/demo.out 2>/dev/null
 kafka-topics.sh --zookeeper $zk_peers --delete --topic test >> $testpath/demo.out 2>/dev/null
+
+# Define the configuration dir for kafka-utils
+export KAFKA_DISCOVERY_DIR=$CDIR/kafka_discovery
+
+# Print out the configuration
+kafka-utils
+
+# Do the cluster consistency test
+kafka-check --cluster-type cluster min_isr
+kafka-check --cluster-type cluster replica_unavailability
+kafka-check --cluster-type cluster replication_factor
+kafka-check --cluster-type cluster offline

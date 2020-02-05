@@ -1,0 +1,17 @@
+<%
+kafka = link('kafka')
+kafka_port = kafka.p('listen_port')
+zks = link('zookeeper')
+zk_port = zks.p('client_port')
+zk_peers=zks.instances.map { |instance| "#{instance.address}:#{zk_port}" }.join(",")
+-%>
+---
+  clusters:
+    cluster-1:
+      broker_list:
+<% kafka.instances.each do |instance| -%>
+        - <%= "#{instance.address}:#{kafka_port}" %>
+<% end -%>
+      zookeeper: "<%= zk_peers -%>/"
+  local_config:
+    cluster: cluster-1
