@@ -51,22 +51,6 @@ instance_groups:
               factor: 1
             min:
               isr: 1
-- name: kafka-manager
-  azs: [z1, z2, z3]
-  instances: 1
-  vm_resources:
-    cpu: 1
-    ram: 1024
-    ephemeral_disk_size: 10240
-  stemcell: default
-  persistent_disk: 10240
-  networks: [{name: default}]
-  jobs:
-  - name: kafka-manager
-    release: kafka
-    properties:
-      username: admin
-      password: ((kafka-manager-password))
 - name: sanity-test
   azs: [z1, z2, z3]
   instances: 1
@@ -93,10 +77,6 @@ instance_groups:
   jobs:
   - name: generatetopics
     release: kafka
-
-variables:
-- name: kafka-manager-password
-  type: password
 
 stemcells:
 - alias: default

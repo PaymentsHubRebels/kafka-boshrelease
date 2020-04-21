@@ -1,5 +1,0 @@
----
-name: kafka-manager
-dependencies: []
-files:
-- kafka/kafka-manager*

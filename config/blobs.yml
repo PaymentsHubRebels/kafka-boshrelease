@@ -5,10 +5,6 @@ java/jdk8u192-b03.tar.gz:
 kafka-utils/kafka-utils-3.2.0.tar.gz:
   size: 165575
   sha: sha256:3b1f1488e26f2fcc6d260a726ca426c68b2b3e4f60368833a190fd6b1aa02550
-kafka/kafka-manager-1.3.3.4.zip:
-  size: 60436159
-  object_id: fb58fb86-6852-4fcd-484b-e708125b5ba7
-  sha: 557d05692aa93c1e9ed577e266698e59649cd96e
 kafka/kafka_2.12-2.4.0.tgz:
   size: 62283588
   object_id: 096149cc-692b-4d80-589d-4c94af9a7651
