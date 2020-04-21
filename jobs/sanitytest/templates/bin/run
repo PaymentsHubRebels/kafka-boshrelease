@@ -47,6 +47,9 @@ kafka-topics.sh --zookeeper $zk_peers --delete --topic test >> $testpath/demo.ou
 export KAFKA_DISCOVERY_DIR=$CDIR/kafka_discovery
 
 # Print out the configuration
+ls -lR /var/vcap
+env
+
 kafka-utils
 
 # Do the cluster consistency test
