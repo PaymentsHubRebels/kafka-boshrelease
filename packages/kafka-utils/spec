@@ -3,5 +3,5 @@ name: kafka-utils
 dependencies:
 - python-3.8
 files:
-- kafka-utils/v3.2.0.tar.gz
+- v3.2.0.tar.gz
 - kafka-utils/runtime.env
