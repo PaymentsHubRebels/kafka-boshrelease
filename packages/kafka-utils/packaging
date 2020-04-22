@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eu
+set -e
 source /var/vcap/packages/python-3.8/bosh/compile.env
 
 echo "${BOSH_INSTALL_TARGET}"
