@@ -3,7 +3,7 @@ set -e
 source /var/vcap/packages/python-3.8/bosh/compile.env
 
 echo "${BOSH_INSTALL_TARGET}"
-pip3 install --trusted-host pypi.org --trusted-host files.pythonhosted.org --prefix=${BOSH_INSTALL_TARGET} ${BOSH_COMPILE_TARGET}/v3.2.0.tar.gz -v
+pip3 install --trusted-host pypi.org --trusted-host files.pythonhosted.org --prefix=${BOSH_INSTALL_TARGET} ${BOSH_COMPILE_TARGET}/v3.2.0.tar.gz
 
 echo "Copying runtime.env..."
 mkdir ${BOSH_INSTALL_TARGET}/bosh
