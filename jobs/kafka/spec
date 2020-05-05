@@ -2,7 +2,7 @@
 name: kafka
 
 packages:
-- openjdk-8-kafka
+- openjdk-8
 - kafka
 
 templates:

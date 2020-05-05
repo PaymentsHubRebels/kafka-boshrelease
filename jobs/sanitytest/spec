@@ -2,7 +2,7 @@
 name: sanitytest
 
 packages:
-- openjdk-8-kafka
+- openjdk-8
 - kafka
 - python-3.8
 - kafka-utils
