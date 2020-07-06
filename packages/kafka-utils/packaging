@@ -5,7 +5,14 @@ source /var/vcap/packages/python-3.8/bosh/compile.env
 ls -lR /var/vcap/data/compile
 
 echo "${BOSH_INSTALL_TARGET}"
-pip3 install --trusted-host pypi.org --trusted-host files.pythonhosted.org  --prefix=${BOSH_INSTALL_TARGET} ${BOSH_COMPILE_TARGET}/v3.2.0.tar.gz
+
+pushd ${BOSH_COMPILE_TARGET}
+    wget https://github.com/bosh-rebels/kafka-utils-dependencies/raw/master/kafka-utils-dependencies.tar    
+    tar xzvf kafka-util-dependencies.tar    
+    rm -rf kafka-util-dependencies.tar
+popd
+
+#pip3 install --trusted-host pypi.org --trusted-host files.pythonhosted.org  --prefix=${BOSH_INSTALL_TARGET} ${BOSH_COMPILE_TARGET}/v3.2.0.tar.gz
 
 echo "Copying runtime.env..."
 mkdir ${BOSH_INSTALL_TARGET}/bosh
