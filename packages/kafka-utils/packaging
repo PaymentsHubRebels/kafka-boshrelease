@@ -6,10 +6,9 @@ ls -lR /var/vcap/data/compile
 
 echo "${BOSH_INSTALL_TARGET}"
 
-pushd ${BOSH_COMPILE_TARGET}
-    wget https://github.com/bosh-rebels/kafka-utils-dependencies/raw/master/kafka-utils-dependencies.tar    
-    tar xzvf kafka-util-dependencies.tar    
-    rm -rf kafka-util-dependencies.tar
+pushd ${BOSH_INSTALL_TARGET} 
+    tar xzvf ${BOSH_COMPILE_TARGET}/kafka-utils-dependencies.tar.gz  
+    rm -rf ${BOSH_COMPILE_TARGET}/kafka-utils-dependencies.tar.gz
 popd
 
 #pip3 install --trusted-host pypi.org --trusted-host files.pythonhosted.org  --prefix=${BOSH_INSTALL_TARGET} ${BOSH_COMPILE_TARGET}/v3.2.0.tar.gz
