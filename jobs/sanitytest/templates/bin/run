@@ -51,5 +51,5 @@ kafka-utils
 # Do the cluster consistency test
 kafka-check --cluster-type cluster min_isr
 kafka-check --cluster-type cluster replica_unavailability
-kafka-check --cluster-type cluster replication_factor
+kafka-check --cluster-type cluster replication_factor || true
 kafka-check --cluster-type cluster offline
