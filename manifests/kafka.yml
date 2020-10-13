@@ -51,6 +51,8 @@ instance_groups:
               factor: 1
             min:
               isr: 1
+      num:
+        partitions: 2
 - name: sanity-test
   azs: [z1, z2, z3]
   instances: 1
