@@ -116,3 +116,7 @@ properties:
   jaas_admin.password:
     description: "admin password used in JAAS configuration"
     default: "admin-secret"
+
+  num.partitions:
+    description: "Number of partitions"
+    default: 1
