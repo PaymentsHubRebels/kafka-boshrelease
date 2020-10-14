@@ -33,12 +33,24 @@ export kafka_hosts=<%= kafka.instances.map { |instance| "#{instance.address}:#{k
 
 set -x
 <% kafka.p("topics").each do |topic| %>
-kafka-topics.sh \
-    --create \
-    --zookeeper $zk_peers \
-    --replication-factor <%= topic["replication_factor"] || 1 %> \
-    --partitions <%= topic["partitions"] || 1 %> \
-    --topic <%= topic["name"] %> \
-    --if-not-exists <% topic["configurations"].each { | config | <%= config %> } if topic["configurations"] %>
+    <% if topic["configurations"] %>
+        kafka-topics.sh \
+            --create \
+            --zookeeper $zk_peers \
+            --replication-factor <%= topic["replication_factor"] || 1 %> \
+            --partitions <%= topic["partitions"] || 1 %> \
+            --topic <%= topic["name"] %> \
+            --if-not-exists \
+            <% topic["configurations"].each do | config | %>
+                <%= config %> \
+            <% end %>
+    <% else %>
+        kafka-topics.sh \
+            --create \
+            --zookeeper $zk_peers \
+            --replication-factor <%= topic["replication_factor"] || 1 %> \
+            --partitions <%= topic["partitions"] || 1 %> \
+            --topic <%= topic["name"] %> \
+            --if-not-exists
     <% end %>
 <% end %>
