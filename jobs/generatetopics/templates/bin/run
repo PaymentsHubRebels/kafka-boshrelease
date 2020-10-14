@@ -40,7 +40,7 @@ kafka-topics.sh \
     --partitions <%= topic["partitions"] || 1 %> \
     --topic <%= topic["name"] %> \
     --if-not-exists <% if topic["configurations"] %>
-        topic["configurations"]each do | config |
+        <% topic["configurations"].each do | config | %>
            <%= config %>
         <% end %>
     <% end %>
