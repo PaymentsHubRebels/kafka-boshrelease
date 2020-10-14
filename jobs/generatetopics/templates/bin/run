@@ -39,5 +39,9 @@ kafka-topics.sh \
     --replication-factor <%= topic["replication_factor"] || 1 %> \
     --partitions <%= topic["partitions"] || 1 %> \
     --topic <%= topic["name"] %> \
-    --if-not-exists
+    --if-not-exists <% if topic["configurations"] %>
+        topic["configurations"]each do | config |
+           <%= config %>
+        <% end %>
+    <% end %>
 <% end %>

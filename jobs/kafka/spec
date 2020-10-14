@@ -65,6 +65,9 @@ properties:
       - name: test
         replication_factor: 1
         partitions: 1
+        configurations:
+          - "--config retention.bytes=10737418240"
+          - "--config cleanup.policy=delete"
 
   auto.create.topics.enable:
     description: "Controls when Kafka enables auto creation of topic on the server."
