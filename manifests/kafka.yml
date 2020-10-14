@@ -52,7 +52,11 @@ instance_groups:
             min:
               isr: 1
       num:
-        partitions: 2
+        partitions: 3
+      topics:
+        name: 'test-topic'
+        replication_factor: 2
+
 - name: sanity-test
   azs: [z1, z2, z3]
   instances: 1
