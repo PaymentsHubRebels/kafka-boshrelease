@@ -32,25 +32,23 @@ export zk_peers=<%= zks.instances.map { |instance| "#{instance.address}:#{zk_por
 export kafka_hosts=<%= kafka.instances.map { |instance| "#{instance.address}:#{kafka_port}" }.join(",") %>
 
 set -x
+
 <% kafka.p("topics").each do |topic| %>
-    <% if topic["configurations"] %>
-        kafka-topics.sh \
-            --create \
-            --zookeeper $zk_peers \
-            --replication-factor <%= topic["replication_factor"] || 1 %> \
-            --partitions <%= topic["partitions"] || 1 %> \
-            --topic <%= topic["name"] %> \
-            --if-not-exists \
-            <% topic["configurations"].each do | config | %>
-                <%= config %> \
-            <% end %>
-    <% else %>
-        kafka-topics.sh \
-            --create \
-            --zookeeper $zk_peers \
-            --replication-factor <%= topic["replication_factor"] || 1 %> \
-            --partitions <%= topic["partitions"] || 1 %> \
-            --topic <%= topic["name"] %> \
-            --if-not-exists
-    <% end %>
+<% if topic["configurations"] %>
+kafka-topics.sh \
+    --create \
+    --zookeeper $zk_peers \
+    --replication-factor <%= topic["replication_factor"] || 1 %> \
+    --partitions <%= topic["partitions"] || 1 %> \
+    --topic <%= topic["name"] %> \
+    --if-not-exists <%= topic["configurations"].each { |config| config }.join(" ") %>
+<% else %>
+kafka-topics.sh \
+    --create \
+    --zookeeper $zk_peers \
+    --replication-factor <%= topic["replication_factor"] || 1 %> \
+    --partitions <%= topic["partitions"] || 1 %> \
+    --topic <%= topic["name"] %> \
+    --if-not-exists
+<% end %>
 <% end %>
