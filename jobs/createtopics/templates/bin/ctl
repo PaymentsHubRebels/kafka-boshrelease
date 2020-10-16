@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+LOG_DIR=/var/vcap/sys/log/createtopics
+
+mkdir -p $LOG_DIR
+
+exec > /var/vcap/sys/log/createtopics/ctl.log
+exec 2>&1
+
+/var/vcap/jobs/generatetopics/bin/run > $LOG_DIR/topic.log 2>&1
