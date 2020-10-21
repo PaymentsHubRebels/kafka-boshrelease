@@ -1,6 +1,8 @@
----
+name: kafka
 blobstore:
   provider: s3
   options:
-    bucket_name: kafka-boshrelease
-final_name: kafka
+    bucket_name: kafka-boshrelease-blobstore
+    region: eu-west-2
+    host: s3-eu-west-2.amazonaws.com
+
