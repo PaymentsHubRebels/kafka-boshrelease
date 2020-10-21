@@ -2,10 +2,15 @@ java/jdk8u192-b03.tar.gz:
   size: 45670457
   object_id: 71d454ef-230f-4f6c-4578-fccf867c9f02
   sha: 4d7b2ee7010a70934b6ee23a772d013a698715dd
-kafka-utils/kafka-utils-3.2.0.tar.gz:
-  size: 165575
-  sha: sha256:3b1f1488e26f2fcc6d260a726ca426c68b2b3e4f60368833a190fd6b1aa02550
+kafka-utils-dependencies.tar.gz:
+  size: 5996589
+  object_id: 12a2ed75-452a-4eac-4917-8e2d655c88e3
+  sha: sha256:44f869abe922b854b1924f70a48ce7831439653c644be819147fc707c1408577
 kafka/kafka_2.12-2.4.0.tgz:
   size: 62283588
   object_id: 096149cc-692b-4d80-589d-4c94af9a7651
   sha: sha256:b9582bab0c3e8d131953b1afa72d6885ca1caae0061c2623071e7f396f2ccfee
+v3.2.0.tar.gz:
+  size: 165575
+  object_id: 6c2f2192-73c0-453e-5090-e25d7876d597
+  sha: sha256:3b1f1488e26f2fcc6d260a726ca426c68b2b3e4f60368833a190fd6b1aa02550
