@@ -1,32 +1,32 @@
 Python-2.7.6.tgz:
   size: 14671200
-  object_id: 398bbffd-fdf4-466a-7953-ac3f26ff1c84
+  object_id: fb02d0e1-0222-4444-4948-c43e73a90943
   sha: sha256:66cd40345bcdc275834386e5503d5d0071ca8d0939cd36ebe6352137ecda2763
 Python-3.8.1.tgz:
   size: 24126374
-  object_id: 68b77d7b-4297-4d5b-5ec3-f3e3bf3c54e4
+  object_id: c3ab7e36-7ad4-48a1-780e-f5f71fca77a7
   sha: sha256:48af0a22d12523bfe3c4f2e35497aa5d3dc069ad0828d4768ecc38aae8b9cf08
 kafka-utils-dependencies.tar.gz:
   size: 5996589
-  object_id: 46fde0c7-3e5d-4b04-5a67-e61f11753ec2
+  object_id: 2551f8f7-45bd-4ac7-6e2a-a3de94a09ef0
   sha: sha256:44f869abe922b854b1924f70a48ce7831439653c644be819147fc707c1408577
 kafka/kafka_2.12-2.4.0.tgz:
-  size: 61604633
-  object_id: af8c26b1-851e-4ea7-77e0-522b04176a70
-  sha: sha256:4a857fe348e39d1cefa71bc4f61da9ffa59efbb1ff79d41709dc3dbca5f04baf
+  size: 62283588
+  object_id: e5ad4483-58d2-4130-5792-e250a59fee39
+  sha: sha256:b9582bab0c3e8d131953b1afa72d6885ca1caae0061c2623071e7f396f2ccfee
 libffi-3.3.tar.gz:
   size: 1305466
-  object_id: 0e8db25e-f5c4-4220-4493-9fef14d52a0c
+  object_id: 20d126a0-8515-499d-68a1-ea279158078a
   sha: sha256:72fba7922703ddfa7a028d513ac15a85c8d54c8d67f55fa5a4802885dc652056
 pip-1.5.2.tar.gz:
   size: 7832506
-  object_id: 13bef44d-f684-412c-7ffa-783bc6f15230
+  object_id: ecef203c-a359-463f-6222-97421ad63cce
   sha: sha256:14a179c8d4911fd3274544150183a99ffc7e08a89cc98b205eadc10f404178cd
 setuptools-2.2.tar.gz:
   size: 733239
-  object_id: c3df8d4e-3e54-4046-543d-46bad2185752
+  object_id: 2232049f-03c7-4deb-49b0-77f6bcd1fa28
   sha: sha256:b622965df91c73065712aa000ba460f2c2df959fbb627d03dfe98446104b2ac6
 v3.2.0.tar.gz:
   size: 165575
-  object_id: a2dd7831-a853-4b4a-7d2f-c44a980a1b0f
+  object_id: f7dd04e9-0b37-4b7e-690d-2fdca97c8620
   sha: sha256:3b1f1488e26f2fcc6d260a726ca426c68b2b3e4f60368833a190fd6b1aa02550
