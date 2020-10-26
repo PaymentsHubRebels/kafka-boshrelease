@@ -4,5 +4,5 @@ blobstore:
   options:
     bucket_name: kafka-boshrelease-blobstore
     region: eu-west-2
-    host: s3-eu-west-2.amazonaws.com
+
 
