@@ -1,4 +1,6 @@
 builds:
   648f2da3-c6f6-43c3-6999-f9d6daff2a4f:
     version: 2.7.20
+  9f6de0aa-3719-417f-6900-a5ef06acd693:
+    version: 2.7.21
 format-version: "2"
