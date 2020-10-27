@@ -1,0 +1,110 @@
+---
+  name: kafka
+  
+  addons:
+  - name: bpm
+    jobs:
+    - name: bpm
+      release: bpm
+  
+  instance_groups:
+  - name: zookeeper
+    azs: [z1, z2, z3]
+    instances: 1
+    jobs:
+    - name: zookeeper
+      release: zookeeper
+      properties: {}
+    - name: status
+      release: zookeeper
+      properties: {}
+    vm_resources:
+      cpu: 1
+      ram: 1024
+      ephemeral_disk_size: 5000
+    stemcell: default
+    persistent_disk: 5000
+    networks:
+    - name: default
+  - name: kafka
+    azs: [z1, z2, z3]
+    instances: 1
+    vm_resources:
+      cpu: 1
+      ram: 1024
+      ephemeral_disk_size: 5000
+    stemcell: default
+    persistent_disk: 5000
+    networks: [{name: default}]
+    jobs:
+    - name: kafka
+      release: kafka
+      properties:
+        offsets:
+          topic:
+            replication:
+              factor: 1
+        transaction:
+          state:
+            log:
+              replication:
+                factor: 1
+              min:
+                isr: 1
+  - name: sanity-test
+    azs: [z1, z2, z3]
+    instances: 1
+    lifecycle: errand
+    vm_resources:
+      cpu: 1
+      ram: 1024
+      ephemeral_disk_size: 5000
+    stemcell: default
+    networks: [{name: default}]
+    jobs:
+    - name: sanitytest
+      release: kafka
+  - name: generate-topics
+    azs: [z1, z2, z3]
+    instances: 1
+    lifecycle: errand
+    vm_resources:
+      cpu: 1
+      ram: 1024
+      ephemeral_disk_size: 5000
+    stemcell: default
+    networks: [{name: default}]
+    jobs:
+    - name: generatetopics
+      release: kafka
+  
+  stemcells:
+  - alias: default
+    os: ubuntu-xenial
+    version: "621.78"
+  
+  update:
+    canaries: 1
+    canary_watch_time: 1000-120000
+    update_watch_time: 1000-120000
+    max_in_flight: 1
+    serial: true
+  
+  releases:
+  - name: bpm
+    sha1: 63a0581216ccc153a38824289f0bd767605401e6
+    stemcell:
+      os: ubuntu-xenial
+      version: "621.78"
+    url: git+https://github.com/cloudfoundry/bpm-release
+    version: 1.1.9
+  - name: zookeeper
+    sha1: 37abc951e6a3cacb4607186a42d33101ebd96500
+    stemcell:
+      os: ubuntu-xenial
+      version: "621.78"
+    url: git+https://github.com/cppforlife/zookeeper-release
+    version: 0.0.10
+  - name: kafka
+    version: latest
+  
