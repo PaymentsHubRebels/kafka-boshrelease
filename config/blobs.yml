@@ -2,10 +2,10 @@ kafka-utils-dependencies.tar.gz:
   size: 5996589
   object_id: 1aefd546-1da4-4fc2-7719-c9ea8e4666e7
   sha: sha256:44f869abe922b854b1924f70a48ce7831439653c644be819147fc707c1408577
-kafka/kafka_2.12-2.4.0.tgz:
-  size: 62283588
-  object_id: e0c2fe39-452a-4ad6-7f0c-e260f6939f68
-  sha: sha256:b9582bab0c3e8d131953b1afa72d6885ca1caae0061c2623071e7f396f2ccfee
+kafka/kafka_2.12-2.5.0.tgz:
+  size: 61604633
+  object_id: 5c37750d-3f92-4a4f-75db-2c1d8dc4ac25
+  sha: sha256:4a857fe348e39d1cefa71bc4f61da9ffa59efbb1ff79d41709dc3dbca5f04baf
 v3.2.0.tar.gz:
   size: 165575
   object_id: c940f0d8-8d84-4a17-6249-f97565c76bbd
