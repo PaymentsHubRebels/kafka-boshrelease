@@ -1,9 +1,0 @@
----
-name: createtopics
-
-templates:
-  bin/ctl: bin/ctl
-
-packages: []
-
-properties: {}
