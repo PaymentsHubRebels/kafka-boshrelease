@@ -1,0 +1,26 @@
+---
+name: reassignpartitions
+
+templates:
+  bin/run.sh.erb: bin/run
+
+packages: []
+
+consumes:
+- name: zookeeper
+  type: zookeeper
+- name: kafka
+  type: conn
+
+properties:
+  topics:
+    description: |
+      A list of structured topics including number of partitions and replication factor.
+      Example:
+        topics:
+        - name: topic1
+          partitions: 3
+          replication_factor: 3
+        - name: topic2
+          partitions: 3
+          replication_factor: 2

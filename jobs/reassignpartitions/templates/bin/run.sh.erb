@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+
+set -euf -o pipefail
+
+source /var/vcap/packages/openjdk-8/bosh/runtime.env
+export PATH=/var/vcap/packages/kafka/bin:$PATH
+
+<%
+require 'yaml'
+
+class ReplicationFactorTooBigError < StandardError
+  def message
+    "replication factor is bigger than the number of replicas"
+  end
+end
+class InvalidTopicsTypeError < StandardError
+  def message
+    "topics property should be a yaml Array"
+  end
+end
+
+if_p("topics") do |topics|
+topics_loaded = YAML.load(topics)
+  if topics_loaded
+    begin
+      zookeeper_link = link('zookeeper')
+      zookeeper_port = zookeeper_link.p('client_port')
+      zookeeper_list =  zookeeper_link.instances.map { |instance| "#{instance.address}:#{zookeeper_port}" }.join(",")
+      kafka_link = link('kafka')
+      kafka_port = kafka_link.p('listen_port')
+      kafka_list =  kafka_link.instances.map { |instance| "#{instance.address}:#{kafka_port}" }.join(",")
+      topics_loaded.each do |topic|
+
+        topic_name = topic.fetch("name")
+        replication_factor = topic.fetch("replication_factor", 1)
+        partitions = topic.fetch("partitions", 1)
+        if replication_factor > kafka_link.instances.count
+          raise ReplicationFactorTooBigError
+        end
+%>
+# processing topic <%= topic_name %>
+# set partition
+zk_peers=<%= zookeeper_list %>
+broker_list=$(zookeeper-shell.sh $zk_peers ls /brokers/ids | tail -n1 | sed 's/[][]//g')
+
+kafka-topics.sh \
+  --alter \
+  --zookeeper $zk_peers \
+  --partitions <%= partitions %> \
+  --topic <%= topic_name%> \
+
+# set the replication_factor
+topics_to_move=$(mktemp)
+full_reassignment=$(mktemp)
+cat<< EOF > $topics_to_move
+{"topics": [{"topic": "<%= topic_name %>"}],"version":1}
+EOF
+kafka-reassign-partitions.sh \
+  --zookeeper $zk_peers \
+  --broker-list "$broker_list"
+  --topics-to-move-json-file $topics_to_move \
+  --generate grep version | tail -n 1 > $full_reassignment
+
+kafka-reassign-partitions \
+  --zookeeper $zk_peers \
+  --reassignment-json-file $full_reassignment \
+  --execute
+<%
+      end
+    rescue ReplicationFactorTooBigError
+      raise ReplicationFactorTooBigError
+    rescue
+      raise InvalidTopicsTypeError
+    end
+  end
+end %>
