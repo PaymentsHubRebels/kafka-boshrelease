@@ -4,7 +4,7 @@ set -eux
 set -o pipefail
 
 source /var/vcap/packages/openjdk-8/bosh/runtime.env
-export PATH=$PATH:/var/vcap/packages/kafka/bin:$PATH
+export PATH=/var/vcap/packages/kafka/bin:$PATH
 
 CDIR=/var/vcap/jobs/kafka/config
 KT=$JAVA_HOME/bin/keytool

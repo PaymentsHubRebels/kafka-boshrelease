@@ -10,7 +10,7 @@ set -u # report the usage of uninitialized variables
 source /var/vcap/packages/openjdk-8/bosh/runtime.env
 source /var/vcap/packages/kafka-utils/bosh/runtime.env
 
-export PATH=$PATH:/var/vcap/packages/kafka/bin:$PATH
+export PATH=/var/vcap/packages/kafka/bin:$PATH
 
 CDIR=/var/vcap/jobs/sanitytest/config
 <% kafka = link('kafka') %>
@@ -39,7 +39,7 @@ mkdir -p $testpath
 
 set -x
 kafka-topics.sh --zookeeper $zk_peers --create --if-not-exists --replication-factor $kafka_hosts_count --partitions $kafka_hosts_count --topic test > $testpath/demo.out
-echo "test message" | kafka-console-producer.sh --broker-list $kafka_hosts --topic test --producer.config $CDIR/client.properties 2> /dev/null 
+echo "test message" | kafka-console-producer.sh --broker-list $kafka_hosts --topic test --producer.config $CDIR/client.properties 2> /dev/null
 kafka-console-consumer.sh --timeout-ms 10000 --bootstrap-server $kafka_hosts --topic test --from-beginning --max-messages 1 --consumer.config $CDIR/client.properties >> $testpath/demo.out 2>/dev/null
 kafka-topics.sh --zookeeper $zk_peers --delete --topic test >> $testpath/demo.out 2>/dev/null
 
