@@ -3,6 +3,8 @@ builds:
     version: 2.7.22
   648f2da3-c6f6-43c3-6999-f9d6daff2a4f:
     version: 2.7.20
+  66814841-27d6-4936-65a1-dd6374f3be2a:
+    version: 2.7.23
   9f6de0aa-3719-417f-6900-a5ef06acd693:
     version: 2.7.21
 format-version: "2"
