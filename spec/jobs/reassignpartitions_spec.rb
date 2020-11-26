@@ -60,7 +60,7 @@ describe 'reassignpartitions job' do
       }
       let(:nil_property) {
         {
-          "topics" => ""
+          "topics" => nil
         }
       }
       it "reacts accordingly" do
@@ -80,23 +80,29 @@ describe 'reassignpartitions job' do
 
       let(:one_topic) {
         {
-          "topics" => %Q(
-          - name: topic1
-            partitions: 3
-            replication_factor: 3
-          )
+          "topics" => [
+            {
+              "name" => "topic1",
+              "partitions" => 3,
+              "replication_factor" => 3
+            }
+          ]
         }
       }
       let(:multiple_topics) {
         {
-          "topics" => %Q(
-          - name: topic1
-            partitions: 3
-            replication_factor: 3
-          - name: topic2
-            partitions: 3
-            replication_factor: 2
-          )
+          "topics" => [
+            {
+              "name"=> "topic1",
+              "partitions"=> 3,
+              "replication_factor"=> 3
+            },
+            {
+              "name"=> "topic2",
+              "partitions"=> 3,
+              "replication_factor"=> 2
+            }
+          ]
         }
       }
       it "render properly" do

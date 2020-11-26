@@ -20,23 +20,21 @@ class InvalidTopicsTypeError < StandardError
 end
 
 if_p("topics") do |topics|
-topics_loaded = YAML.load(topics)
-  if topics_loaded
-    begin
-      zookeeper_link = link('zookeeper')
-      zookeeper_port = zookeeper_link.p('client_port')
-      zookeeper_list =  zookeeper_link.instances.map { |instance| "#{instance.address}:#{zookeeper_port}" }.join(",")
-      kafka_link = link('kafka')
-      kafka_port = kafka_link.p('listen_port')
-      kafka_list =  kafka_link.instances.map { |instance| "#{instance.address}:#{kafka_port}" }.join(",")
-      topics_loaded.each do |topic|
+  begin
+    zookeeper_link = link('zookeeper')
+    zookeeper_port = zookeeper_link.p('client_port')
+    zookeeper_list =  zookeeper_link.instances.map { |instance| "#{instance.address}:#{zookeeper_port}" }.join(",")
+    kafka_link = link('kafka')
+    kafka_port = kafka_link.p('listen_port')
+    kafka_list =  kafka_link.instances.map { |instance| "#{instance.address}:#{kafka_port}" }.join(",")
+    topics.each do |topic|
 
-        topic_name = topic.fetch("name")
-        replication_factor = topic.fetch("replication_factor", 1)
-        partitions = topic.fetch("partitions", 1)
-        if replication_factor > kafka_link.instances.count
-          raise ReplicationFactorTooBigError
-        end
+      topic_name = topic.fetch("name")
+      replication_factor = topic.fetch("replication_factor", 1)
+      partitions = topic.fetch("partitions", 1)
+      if replication_factor > kafka_link.instances.count
+        raise ReplicationFactorTooBigError
+      end
 %>
 # processing topic <%= topic_name %>
 # set partition
@@ -66,11 +64,10 @@ kafka-reassign-partitions \
   --reassignment-json-file $full_reassignment \
   --execute
 <%
-      end
-    rescue ReplicationFactorTooBigError
-      raise ReplicationFactorTooBigError
-    rescue
-      raise InvalidTopicsTypeError
     end
+  rescue ReplicationFactorTooBigError
+    raise ReplicationFactorTooBigError
+  rescue
+    raise InvalidTopicsTypeError
   end
 end %>
