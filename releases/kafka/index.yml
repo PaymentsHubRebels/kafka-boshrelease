@@ -7,4 +7,6 @@ builds:
     version: 2.7.23
   9f6de0aa-3719-417f-6900-a5ef06acd693:
     version: 2.7.21
+  fcd154ee-2d14-43f9-6404-662387a7a41e:
+    version: 2.7.24
 format-version: "2"
