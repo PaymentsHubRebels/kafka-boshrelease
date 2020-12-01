@@ -35,11 +35,13 @@ if_p("topics") do |topics|
       if replication_factor > kafka_link.instances.count
         raise ReplicationFactorTooBigError
       end
+      replication_factor_array= [*1..replication_factor]
 %>
 # processing topic <%= topic_name %>
 # set partition
 zk_peers=<%= zookeeper_list %>
-broker_list=$(zookeeper-shell.sh $zk_peers ls /brokers/ids | tail -n1 | sed 's/[][]//g')
+broker_list=$(zookeeper-shell.sh $zk_peers ls /brokers/ids | tail -n1 | sed 's/[][]//g' | sed 's/ //g')
+replicas=<%= replication_factor_array %>
 
 kafka-topics.sh \
   --alter \
@@ -55,11 +57,17 @@ cat<< EOF > $topics_to_move
 EOF
 kafka-reassign-partitions.sh \
   --zookeeper $zk_peers \
-  --broker-list "$broker_list"
+  --broker-list "$broker_list" \
   --topics-to-move-json-file $topics_to_move \
-  --generate grep version | tail -n 1 > $full_reassignment
+  --generate | grep version | tail -n 1 > $full_reassignment
 
-kafka-reassign-partitions \
+no_of_nodes=<%=kafka_link.instances.count %>
+
+# update replicas value based on passed replication_factor from manifest
+sed -i 's/\[[1-'"$no_of_nodes"']\]/'"$replicas"'/g' $full_reassignment
+sed -i 's/,\"log_dirs\":\[\"any\"\]//g' $full_reassignment
+
+kafka-reassign-partitions.sh \
   --zookeeper $zk_peers \
   --reassignment-json-file $full_reassignment \
   --execute
