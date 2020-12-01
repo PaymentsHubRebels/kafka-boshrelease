@@ -1,6 +1,8 @@
 builds:
   07e6d5f4-b4e8-4d9b-663f-9c4240d42505:
     version: 2.7.22
+  614d8d4a-1125-4b7f-5454-eb3c6206c876:
+    version: 2.7.25
   648f2da3-c6f6-43c3-6999-f9d6daff2a4f:
     version: 2.7.20
   66814841-27d6-4936-65a1-dd6374f3be2a:
