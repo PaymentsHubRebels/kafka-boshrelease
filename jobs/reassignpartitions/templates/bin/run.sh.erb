@@ -41,7 +41,7 @@ if_p("topics") do |topics|
 # set partition
 zk_peers=<%= zookeeper_list %>
 broker_list=$(zookeeper-shell.sh $zk_peers ls /brokers/ids | tail -n1 | sed 's/[][]//g' | sed 's/ //g')
-replicas=<%= replication_factor_array %>
+replicas=$(echo <%= replication_factor_array %> | sed 's/ //g')
 
 kafka-topics.sh \
   --alter \
