@@ -7,6 +7,10 @@ set -u # report the usage of uninitialized variables
 
 ############################################################################
 
+<% if not spec.bootstrap %>
+exit 0
+<% end %>
+
 source /var/vcap/packages/openjdk-8/bosh/runtime.env
 export PATH=/var/vcap/packages/kafka/bin:$PATH
 
