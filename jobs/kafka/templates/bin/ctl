@@ -30,6 +30,8 @@ case $1 in
   start)
     exec /var/vcap/packages/kafka/bin/kafka-server-start.sh \
       /var/vcap/jobs/kafka/config/server.properties
+    exec /var/vcap/packages/kafka/bin/connect-distributed.sh \
+    /var/vcap/jobs/kafka/config/connect-distributed.properties
     ;;
 
   *)

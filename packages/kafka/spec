@@ -3,3 +3,4 @@ name: kafka
 dependencies: []
 files:
 - kafka/kafka_*
+- confluentinc-kafka-connect-elasticsearch-11.0.4.zip
