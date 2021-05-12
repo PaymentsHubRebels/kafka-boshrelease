@@ -13,6 +13,8 @@ builds:
     version: 2.7.28
   9f6de0aa-3719-417f-6900-a5ef06acd693:
     version: 2.7.21
+  adee90a8-3a37-4e4e-7709-8939ffb9e54c:
+    version: 2.7.29
   edf1b378-0be1-4c23-681d-6ab13533d192:
     version: 2.7.27
   fcd154ee-2d14-43f9-6404-662387a7a41e:
