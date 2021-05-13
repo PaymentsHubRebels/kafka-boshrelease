@@ -1,0 +1,13 @@
+#!/bin/bash
+
+exec 2>&1
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+############################################################################
+
+source /var/vcap/packages/openjdk-8/bosh/runtime.env
+
+exec /var/vcap/packages/kafka/bin/connect-distributed.sh \
+/var/vcap/jobs/kafka/config/connect-distributed.properties
