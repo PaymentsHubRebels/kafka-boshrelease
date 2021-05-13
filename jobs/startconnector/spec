@@ -1,8 +1,11 @@
 ---
 name: startconnector
 
-templates: {}
+packages:
+- openjdk-8
+- kafka
 
-packages: []
+templates:
+  bin/run: bin/run
 
 properties: {}
