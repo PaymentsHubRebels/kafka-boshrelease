@@ -17,6 +17,7 @@ templates:
   config/key.pem: config/key.pem
   config/kafka_server_jaas.conf: config/kafka_server_jaas.conf
   config/connect-distributed.properties: config/connect-distributed.properties
+  config/connect-log4j.properties: config/connect-log4j.properties
 
 consumes:
 - name: zookeeper
