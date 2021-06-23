@@ -36,7 +36,7 @@ consumes:
 - name: zookeeper
   type: zookeeper
 - name: kafka
-  type: kafka
+  type: conn
 
 properties:
   listen_port:
