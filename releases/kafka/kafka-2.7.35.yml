@@ -1,0 +1,66 @@
+name: kafka
+version: 2.7.35
+commit_hash: a359c01
+uncommitted_changes: false
+jobs:
+- name: generatetopics
+  version: 1325ddb55e131475319b7b75a75b7abcd0b23652bb1e5cd5ac48f72cca2f4181
+  fingerprint: 1325ddb55e131475319b7b75a75b7abcd0b23652bb1e5cd5ac48f72cca2f4181
+  sha1: sha256:c019efc3c8ef1e9c3d5f97c783688e1144ab643e259059293b30f736c22e318a
+  packages:
+  - openjdk-8
+  - kafka
+- name: kafka
+  version: 6edbb896bd41905322f92e9d14e5738b3f27eb49541d802c0c2e729a1894eeea
+  fingerprint: 6edbb896bd41905322f92e9d14e5738b3f27eb49541d802c0c2e729a1894eeea
+  sha1: sha256:490e79099d77c56d078b14cd113aa003bb97fb96090f9e8fd27137111e9ecf3b
+  packages:
+  - openjdk-8
+  - kafka
+- name: reassignpartitions
+  version: 4fdb1aad829a803b64cd39e0bd989e660298a9b8f9cccc6fe3f98c1a1f824ca8
+  fingerprint: 4fdb1aad829a803b64cd39e0bd989e660298a9b8f9cccc6fe3f98c1a1f824ca8
+  sha1: sha256:02b859c3216d05f950502d6ffcbe29c9f02930bce41d8edd562110bb294d5347
+  packages: []
+- name: sanitytest
+  version: 594d1fa97077eebba7133781bc3bf9abf8eec091c881a0c064a52b74268280c7
+  fingerprint: 594d1fa97077eebba7133781bc3bf9abf8eec091c881a0c064a52b74268280c7
+  sha1: sha256:d4e15cdf8812fe7bd3096c3434745987e1fda03ae2dadb3661bcbb24a9c73900
+  packages:
+  - openjdk-8
+  - kafka
+  - python-3.8
+  - kafka-utils
+- name: startconnector
+  version: 9270ae2b2286246f7c0872fc43b3d0fdd4e975ac4cb413349cf6ca507ed36b76
+  fingerprint: 9270ae2b2286246f7c0872fc43b3d0fdd4e975ac4cb413349cf6ca507ed36b76
+  sha1: sha256:e074377a200210d8cadaf1adac971fda1fbf77086958d87f0499110066b78d98
+  packages:
+  - openjdk-8
+  - kafka
+packages:
+- name: kafka
+  version: 61cc526397ae612dac10d842069d07e757422270028bfbf86f67dbb6982fb254
+  fingerprint: 61cc526397ae612dac10d842069d07e757422270028bfbf86f67dbb6982fb254
+  sha1: sha256:ed59774cf4ca42e070283f08ccbdfa04b7380f9f3481179fe4acf5ac4b40ba24
+  dependencies: []
+- name: kafka-utils
+  version: 4211aefd399f77c54d0ac3c1d06a3fa9780e9fac80a77b30dd7d1196f6d4e5d7
+  fingerprint: 4211aefd399f77c54d0ac3c1d06a3fa9780e9fac80a77b30dd7d1196f6d4e5d7
+  sha1: sha256:ba8af7869d02193354424ce1e01c95423bb534a538c061fb18a668fc8a55b80e
+  dependencies:
+  - python-3.8
+- name: openjdk-8
+  version: 13b0d6b74f1575b271936826db71785e83994e1b564e1f8d37a6a3c213978820
+  fingerprint: 13b0d6b74f1575b271936826db71785e83994e1b564e1f8d37a6a3c213978820
+  sha1: sha256:cdc1eb06e61cd7abd0c1fcf161a688953a81c985fe45755bedf6eda9f585db65
+  dependencies: []
+- name: python-3.8
+  version: caeb5884432b446aa9716fd7ae1d20edba515004efd46a8fb6fbb6cb02a62aa0
+  fingerprint: caeb5884432b446aa9716fd7ae1d20edba515004efd46a8fb6fbb6cb02a62aa0
+  sha1: sha256:c74c668cab6df83c649bd4625273e5550b79b4041d623c3e0dddd06e4f3acad2
+  dependencies: []
+license:
+  version: 6c459eea9019ff7638f3ae884bcf29889f0fbccd13ee37a6a71b896e138df8e5
+  fingerprint: 6c459eea9019ff7638f3ae884bcf29889f0fbccd13ee37a6a71b896e138df8e5
+  sha1: sha256:a96e47bcb843de65f7cf7686ba47e4eb0559201faa7b2f40655a96b640e18fe7
