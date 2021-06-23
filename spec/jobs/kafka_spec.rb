@@ -19,8 +19,21 @@ describe 'kafka job' do
       )
     }
 
+    let(:kafka_link) {
+      Bosh::Template::Test::Link.new(
+        name: 'kafka',
+        instances: [
+          Bosh::Template::Test::LinkInstance.new(),
+          Bosh::Template::Test::LinkInstance.new()
+        ],
+        properties: {
+          "client_port" => 1
+        }
+      )
+    }
+
     let(:links) {
-      [zookeeper_link]
+      [zookeeper_link, kafka_link]
     }
     
     describe "with default manifest values" do
@@ -64,6 +77,18 @@ describe 'kafka job' do
 
       it "sets broker id for third instance based on starting index provided" do
         expect(template.render(manifest, spec: instance_2, consumes: links)).to include("broker.id=7")
+      end
+
+      it "sets default number of partition to the number of broker instances" do
+        expect(template.render(manifest, consumes: links)).to include("num.partitions=2")
+      end
+
+      it "sets default number of replicas to the number of broker instances" do
+        expect(template.render(manifest, consumes: links)).to include("default.replication.factor=2")
+      end
+
+      it "sets default number of min in-sync replicas to the number of broker instances less 1" do
+        expect(template.render(manifest, consumes: links)).to include("min.insync.replicas=1")
       end
     end
   end

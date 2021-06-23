@@ -19,10 +19,6 @@ templates:
   config/connect-distributed.properties: config/connect-distributed.properties
   config/connect-log4j.properties: config/connect-log4j.properties
 
-consumes:
-- name: zookeeper
-  type: zookeeper
-
 provides:
 - name: kafka
   type: conn
@@ -35,6 +31,12 @@ provides:
   - jaas_admin.username
   - jaas_admin.password
   - topics
+
+consumes:
+- name: zookeeper
+  type: zookeeper
+- name: kafka
+  type: kafka
 
 properties:
   listen_port:
