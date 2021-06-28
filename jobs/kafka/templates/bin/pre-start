@@ -29,6 +29,27 @@ echo "writing key store"
 $KT -importkeystore -deststorepass $SP -destkeypass $SP -destkeystore $KS -deststoretype PKCS12 -srckeystore $TK -srcstoretype PKCS12 -srcstorepass $SP -srckeypass $SP -alias localhost
 <% end %>
 
+echo "Importing host certificates to JVM castore"
+
+JRE_JVM_CA_PATH=/var/vcap/packages/openjdk-8/jre/lib/security/cacerts
+CERTIFICATE_PATH=/usr/local/share/ca-certificates
+PATTERN="$CERTIFICATE_PATH/*.crt"
+
+if ls $PATTERN 1> /dev/null 2>&1; then
+	certificates=$(ls -1 /usr/local/share/ca-certificates/*.crt)
+	for cert in ${certificates}; do
+		cert_alias="$( echo $cert | cut -d '.' -f1 | cut -d '/' -f6)"
+		$KT -list -alias $cert_alias -keystore $JRE_JVM_CA_PATH -storepass changeit
+			if [[ $? == 1 ]]; then
+					$KT -import -trustcacerts -file  $cert -alias $cert_alias -keystore $JRE_JVM_CA_PATH -storepass changeit -trustcacerts -noprompt
+			else
+					echo "$cert already exist"
+			fi
+	done
+else
+	echo "No certificate exist at $CERTIFICATE_PATH"
+fi
+
 
 <% zks = link('zookeeper') %>
 <% zk_port = zks.p('client_port') %>
